@@ -6,7 +6,7 @@ const Newsletter = () => {
     <section className="py-16 bg-[#101829] text-white">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Subscribe to our newsletter</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Subscribe to our Newsletter</h2>
           <p className="text-lg mb-8">
             Get paper advice for your journey to university delivered to your inbox each month. 
             It's smart, and worthwhile - We promise!
@@ -17,7 +17,7 @@ const Newsletter = () => {
               <input
                 type="email"
                 placeholder="Email address"
-                className="flex-grow px-4 py-3 rounded-md text-white"
+                className="flex-grow px-4 py-3 rounded-lg text-white border-2 border-gray-100 hover:border-blue-600"
               />
               
             </div>

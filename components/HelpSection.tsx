@@ -24,12 +24,15 @@ const HelpSection = () => {
               our experts will be happy to answer your questions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+              <a 
+                href="/faqs" 
+                className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-center"
+              >
                 Read FAQs
-              </button>
-              <button className="px-6 py-3 border border-blue-600 text-blue-600 rounded-md hover:bg-blue-50 transition-colors">
+              </a>
+              <a href='/contact' className="px-6 py-3 border border-blue-600 text-blue-600 rounded-md hover:bg-blue-50 transition-colors">
                 Ask a question
-              </button>
+              </a>
             </div>
           </div>
         </div>

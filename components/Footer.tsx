@@ -15,10 +15,10 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: <FaFacebook size={20} />, href: '#' },
-    { icon: <FaInstagram size={20} />, href: '#' },
-    { icon: <FaTwitter size={20} />, href: '#' },
-    { icon: <FaLinkedin size={20} />, href: '#' }
+    { icon: <FaFacebook size={20} />, href: 'facebook.com' },
+    { icon: <FaInstagram size={20} />, href: 'instagram.com' },
+    { icon: <FaTwitter size={20} />, href: 'x.com' },
+    { icon: <FaLinkedin size={20} />, href: 'linkedin.com' }
   ];
 
   return (

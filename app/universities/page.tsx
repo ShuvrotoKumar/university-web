@@ -83,8 +83,6 @@ const UniversitiesPage = () => {
     return (
         <div className="min-h-screen bg-gray-50">
             <Header />
-
-            {/* Hero Section */}
             {/* Hero Section */}
             <section className="relative h-[700px] flex items-center">
                 {/* Background Image */}
@@ -156,7 +154,7 @@ const UniversitiesPage = () => {
                         <h2 className="text-3xl font-bold text-blue-600">
                             {filteredUniversities.length} Universities Found
                         </h2>
-                        <select className="px-4 py-2 border border-gray-300 rounded-md">
+                        <select className="px-4 py-2 border border-gray-300 text-blue-600 rounded-md">
                             <option>Sort by: Ranking</option>
                             <option>Sort by: Name (A-Z)</option>
                             <option>Sort by: Location</option>

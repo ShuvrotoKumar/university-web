@@ -1,6 +1,7 @@
 // components/TopUniversities.tsx
 import React from 'react';
 import Image from 'next/image';
+import Card from './ui/Card';
 
 const TopUniversities = () => {
   const universities = [
@@ -29,12 +30,12 @@ const TopUniversities = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl text-blue-600 font-bold">Top ranking universities</h2>
-          <a href="#" className="text-blue-600 hover:underline">See All</a>
+          <a href="/universities" className="text-blue-600 hover:underline">See All</a>
         </div>
         
         <div className="grid md:grid-cols-3 gap-8">
           {universities.map((uni) => (
-            <div key={uni.id} className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+            <Card key={uni.id}>
               <div className="h-48 relative">
                 <Image 
                   src={uni.image} 
@@ -47,7 +48,7 @@ const TopUniversities = () => {
                 <h3 className="text-xl text-blue-600 font-semibold mb-2">{uni.name}</h3>
                 <p className="text-gray-600">{uni.location}</p>
               </div>
-            </div>
+            </Card>
           ))}
         </div>
       </div>

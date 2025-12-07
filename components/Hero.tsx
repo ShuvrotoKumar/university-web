@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const Hero = () => {
   return (
-    <section className="relative h-[800px] flex items-center">
+    <section className="relative h-[700px] flex items-center">
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full">
         <Image
@@ -28,9 +28,9 @@ const Hero = () => {
         <p className="text-xl md:text-2xl mb-8 max-w-2xl">
           The Ultimate Guide to Universities Worldwide
         </p>
-        <button className="px-8 py-3 bg-yellow-400 text-gray-900 font-semibold rounded-md hover:bg-yellow-500 transition-colors">
+        <a href='/courses' className="px-8 py-3 bg-yellow-400 text-gray-900 font-semibold rounded-md hover:bg-yellow-500 transition-colors">
           Get Started
-        </button>
+        </a>
       </div>
     </section>
   );

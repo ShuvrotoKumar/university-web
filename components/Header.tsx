@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import AuthModal from './AuthModal';
-
+import Image from 'next/image';
 const Header = () => {
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -35,17 +35,33 @@ const Header = () => {
     };
 
     const isActive = (path: string) => {
-        return pathname === path ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600';
+        if (pathname === path) {
+            return `font-medium ${isSpecialPage ? 'text-white' : 'text-blue-400'}`;
+        }
+        return 'text-gray-300 hover:text-blue-400';
     };
 
+    const isSpecialPage = ['/','/universities', '/courses', '/community', '/news', '/about', '/terms', '/about', '/contact', '/faqs','/cookie', '/privacy'].includes(pathname);
+    const headerBgColor = isSpecialPage ? 'bg-black' : 'bg-#101829';
+    const headerTextColor = 'text-white';
+    const activeLinkColor = isSpecialPage ? 'text-white' : 'text-blue-400';
+    const hoverLinkColor = 'hover:text-blue-400';
+
     return (
-        <header className="bg-white shadow-sm">
+        <header className={`${headerBgColor} shadow-sm sticky top-0 z-50`}>
             <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-                <Link href="/" className="text-2xl font-bold text-blue-800">
-                    Mrs. College Guide
+                <Link href="/" className="flex items-center">
+                    <Image
+                        src="/logo.png"
+                        alt='University Guide Logo'
+                        width={40}
+                        height={40}
+                        className="object-contain h-12 w-auto"
+                        priority
+                    />
                 </Link>
 
-                <nav className="hidden md:flex space-x-6">
+                <nav className="hidden text-white md:flex space-x-6">
                     <Link href="/" className={`${isActive('/')} transition-colors`}>
                         Home
                     </Link>
@@ -69,7 +85,7 @@ const Header = () => {
                 <div className="flex items-center gap-0.5">
                     <button
                         onClick={() => handleAuthClick('login')}
-                        className="px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+                        className="px-4 py-2  text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
                     >
                         Login
                     </button>

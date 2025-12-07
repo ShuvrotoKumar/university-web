@@ -29,7 +29,7 @@ const PopularCourses = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl text-blue-600 font-bold">Most popular courses</h2>
-          <a href="#" className="text-blue-600 hover:underline">See All</a>
+          <a href="/courses" className="text-blue-600 hover:underline">See All</a>
         </div>
         
         <div className="grid md:grid-cols-3 gap-8">
@@ -46,7 +46,7 @@ const PopularCourses = () => {
               <div className="p-6">
                 <h3 className="text-xl text-blue-600 font-semibold mb-2">{course.name}</h3>
                 <p className="text-gray-600 mb-4">{course.description}</p>
-                <a href="#" className="text-blue-600 hover:underline">Learn More →</a>
+                <a href="/courses" className="text-blue-600 hover:underline">Learn More →</a>
               </div>
             </div>
           ))}

@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import { MapPin, Mail, Phone, Clock, Send } from 'lucide-react';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
@@ -26,7 +28,7 @@ export default function ContactPage() {
     console.log('Form submitted:', formData);
     // You can add your form submission logic here
   };
-
+  
   return (
     <div className="min-h-screen bg-gray-50">
         <Header />
@@ -220,19 +222,36 @@ export default function ContactPage() {
                 question: 'What documents do I need to submit?',
                 answer: 'You will need to submit your academic transcripts, identification documents, and any required test scores.'
               }
-            ].map((item, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
-                <button className="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none">
-                  <span className="font-medium text-gray-800">{item.question}</span>
-                  <svg className="w-5 h-5 text-gray-500 transition-transform duration-200 transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                <div className="px-6 pb-4 pt-0 text-gray-600">
-                  {item.answer}
+            ].map((item, index) => {
+              const [isOpen, setIsOpen] = useState(false);
+              
+              return (
+                <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
+                  <button 
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none hover:bg-gray-50 transition-colors duration-200"
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-${index}`}
+                  >
+                    <span className="font-medium text-gray-800">{item.question}</span>
+                    {isOpen ? (
+                      <FaChevronUp className="w-5 h-5 text-gray-500 transition-transform duration-200" />
+                    ) : (
+                      <FaChevronDown className="w-5 h-5 text-gray-500 transition-transform duration-200" />
+                    )}
+                  </button>
+                  <div 
+                    id={`faq-${index}`}
+                    className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-40 pb-4 pt-2 opacity-100' : 'max-h-0 opacity-0'}`}
+                    aria-hidden={!isOpen}
+                  >
+                    <div className="text-gray-600">
+                      {item.answer}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

@@ -32,12 +32,12 @@ const AuthModal = ({ onClose, initialMode }: AuthModalProps) => {
 
 
   return (
-    <div 
+    <div
       className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 p-4"
       onClick={handleBackdropClick}
     >
       <div className="bg-white rounded-lg w-full max-w-md relative">
-        <button 
+        <button
           type="button"
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl"
@@ -45,12 +45,12 @@ const AuthModal = ({ onClose, initialMode }: AuthModalProps) => {
         >
           ✕
         </button>
-        
+
         <div className="p-8">
           <h2 className="text-2xl text-black font-bold mb-6 text-center">
             {mode === 'login' ? 'Login to Your Account' : 'Create an Account'}
           </h2>
-          
+
           <div className="flex border-b mb-6">
             <button
               className={`flex-1 py-2 font-medium ${mode === 'login' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500'}`}
@@ -80,7 +80,7 @@ const AuthModal = ({ onClose, initialMode }: AuthModalProps) => {
                 />
               </div>
             )}
-            
+
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                 Email Address
@@ -92,7 +92,7 @@ const AuthModal = ({ onClose, initialMode }: AuthModalProps) => {
                 placeholder="Enter your email"
               />
             </div>
-            
+
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
                 Password
@@ -162,7 +162,7 @@ const AuthModal = ({ onClose, initialMode }: AuthModalProps) => {
               >
                 <span className="sr-only">Sign in with Google</span>
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                  <path d="M15.545 8.558a5.478 5.478 0 0 1-1.56.425 2.75 2.75 0 0 0 1.2-1.516 5.49 5.49 0 0 1-1.74.666 2.74 2.74 0 0 0-4.665 1.5 2.76 2.76 0 0 0 .058.63 7.77 7.77 0 0 1-5.64-2.857 2.75 2.75 0 0 0-.37 1.377 2.75 2.75 0 0 0 1.22 2.29 2.76 2.76 0 0 1-1.24-.34v.035a2.75 2.75 0 0 0 2.2 2.69 2.75 2.75 0 0 1-1.24.035 2.75 2.75 0 0 0 2.56 1.905 5.52 5.52 0 0 1-3.41 1.18 7.83 7.83 0 0 1-.66-.03 7.76 7.76 0 0 0 4.29 1.26c5.15 0 7.96-4.27 7.96-7.96 0-.12 0-.24-.01-.36a5.68 5.68 0 0 0 1.4-1.45z"/>
+                  <path d="M15.545 8.558a5.478 5.478 0 0 1-1.56.425 2.75 2.75 0 0 0 1.2-1.516 5.49 5.49 0 0 1-1.74.666 2.74 2.74 0 0 0-4.665 1.5 2.76 2.76 0 0 0 .058.63 7.77 7.77 0 0 1-5.64-2.857 2.75 2.75 0 0 0-.37 1.377 2.75 2.75 0 0 0 1.22 2.29 2.76 2.76 0 0 1-1.24-.34v.035a2.75 2.75 0 0 0 2.2 2.69 2.75 2.75 0 0 1-1.24.035 2.75 2.75 0 0 0 2.56 1.905 5.52 5.52 0 0 1-3.41 1.18 7.83 7.83 0 0 1-.66-.03 7.76 7.76 0 0 0 4.29 1.26c5.15 0 7.96-4.27 7.96-7.96 0-.12 0-.24-.01-.36a5.68 5.68 0 0 0 1.4-1.45z" />
                 </svg>
               </button>
               <button
@@ -181,7 +181,7 @@ const AuthModal = ({ onClose, initialMode }: AuthModalProps) => {
             {mode === 'login' ? (
               <>
                 Don't have an account?{' '}
-                <button 
+                <button
                   onClick={() => switchMode('signup')}
                   className="text-blue-600 hover:underline"
                 >
@@ -191,7 +191,7 @@ const AuthModal = ({ onClose, initialMode }: AuthModalProps) => {
             ) : (
               <>
                 Already have an account?{' '}
-                <button 
+                <button
                   onClick={() => switchMode('login')}
                   className="text-blue-600 hover:underline"
                 >
