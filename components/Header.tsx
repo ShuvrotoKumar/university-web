@@ -1,35 +1,36 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import AuthModal from './AuthModal';
 import Image from 'next/image';
+
 const Header = () => {
     const pathname = usePathname();
-    const searchParams = useSearchParams();
     const router = useRouter();
     const [showAuthModal, setShowAuthModal] = useState(false);
     const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
 
     useEffect(() => {
-        const mode = searchParams.get('mode');
+        const params = new URLSearchParams(window.location.search);
+        const mode = params.get('mode');
         if (mode === 'login' || mode === 'signup') {
             setAuthMode(mode);
             setShowAuthModal(true);
         } else {
             setShowAuthModal(false);
         }
-    }, [searchParams]);
+    }, [pathname]);
 
     const handleAuthClick = (mode: 'login' | 'signup') => {
-        const params = new URLSearchParams(searchParams.toString());
+        const params = new URLSearchParams(window.location.search);
         params.set('mode', mode);
         router.push(`?${params.toString()}`, { scroll: false });
     };
 
     const closeAuthModal = () => {
-        const params = new URLSearchParams(searchParams.toString());
+        const params = new URLSearchParams(window.location.search);
         params.delete('mode');
         router.push(`?${params.toString()}`, { scroll: false });
     };

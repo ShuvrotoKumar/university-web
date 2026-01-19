@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 interface AuthModalProps {
   onClose: () => void;
@@ -11,7 +11,6 @@ interface AuthModalProps {
 const AuthModal = ({ onClose, initialMode }: AuthModalProps) => {
   const [mode, setMode] = useState<'login' | 'signup'>(initialMode);
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
     setMode(initialMode);
@@ -19,7 +18,7 @@ const AuthModal = ({ onClose, initialMode }: AuthModalProps) => {
 
   const switchMode = (newMode: 'login' | 'signup') => {
     setMode(newMode);
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(window.location.search);
     params.set('mode', newMode);
     router.push(`?${params.toString()}`, { scroll: false });
   };

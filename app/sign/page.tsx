@@ -3,12 +3,11 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { FaGoogle, FaFacebook, FaApple } from 'react-icons/fa';
 
 const SignPage = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
@@ -41,7 +40,7 @@ const SignPage = () => {
       // Handle login logic
       console.log('Login with:', { email: formData.email, password: formData.password });
       // Redirect after successful login
-      const redirectTo = searchParams.get('redirect') || '/';
+      const redirectTo = new URLSearchParams(window.location.search).get('redirect') || '/';
       router.push(redirectTo);
     } else {
       // Handle signup logic
