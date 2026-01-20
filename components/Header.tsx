@@ -84,18 +84,22 @@ const Header = () => {
                 </nav>
 
                 <div className="flex items-center gap-0.5">
+                    <Link href="/auth/login">
                     <button
                         onClick={() => handleAuthClick('login')}
                         className="px-4 py-2  text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
                     >
                         Login
                     </button>
+                    </Link>
+                    <Link href="/auth/signup">
                     <button
                         onClick={() => handleAuthClick('signup')}
                         className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
                     >
                         Sign Up
                     </button>
+                    </Link>
                     {showAuthModal && (
                         <AuthModal onClose={closeAuthModal} initialMode={authMode} />
                     )}
