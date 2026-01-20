@@ -9,6 +9,7 @@ const Register = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     password: '',
     confirmPassword: ''
   })
@@ -30,6 +31,10 @@ const Register = () => {
       newErrors.email = 'Email is invalid'
     }
     
+    if (!formData.phone) {
+      newErrors.phone = 'Phone is required'
+    }
+
     if (!formData.password) {
       newErrors.password = 'Password is required'
     } else if (formData.password.length < 6) {
@@ -159,6 +164,37 @@ const Register = () => {
               )}
             </div>
 
+               <div>
+              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                Phone Number
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Mail className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className={`w-full pl-10 pr-3 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 ${
+                    errors.phone ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                  }`}
+                  placeholder="+1234567890"
+                />
+              </div>
+              {errors.phone && (
+                <motion.p
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mt-2 text-sm text-red-600 flex items-center"
+                >
+                  <AlertCircle className="w-4 h-4 mr-1" />
+                  {errors.phone}
+                </motion.p>
+              )}
+            </div>
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                 Password

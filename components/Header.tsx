@@ -92,7 +92,7 @@ const Header = () => {
                         Login
                     </button>
                     </Link>
-                    <Link href="/auth/signup">
+                    <Link href="/auth/register">
                     <button
                         onClick={() => handleAuthClick('signup')}
                         className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
