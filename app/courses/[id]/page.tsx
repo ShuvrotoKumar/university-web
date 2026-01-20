@@ -34,6 +34,9 @@ const CourseDetailsPage = () => {
   const [isEnrolled, setIsEnrolled] = useState(false)
   const [isLiked, setIsLiked] = useState(false)
   const [activeTab, setActiveTab] = useState('overview')
+  const [showAlert, setShowAlert] = useState(false)
+  const [alertMessage, setAlertMessage] = useState('')
+  const [alertType, setAlertType] = useState<'success' | 'error' | 'info'>('info')
 
   // Extended course data with comprehensive information
   const coursesData = {
@@ -267,7 +270,25 @@ const CourseDetailsPage = () => {
   }
 
   const handleEnroll = () => {
+    if (!isEnrolled) {
+      setAlertMessage('Are you sure you want to enroll in this course?')
+      setAlertType('info')
+      setShowAlert(true)
+    }
+  }
+
+  const confirmEnrollment = () => {
     setIsEnrolled(true)
+    setShowAlert(false)
+    setAlertMessage('Congratulations! You have successfully enrolled in the course.')
+    setAlertType('success')
+    setTimeout(() => {
+      setShowAlert(false)
+    }, 3000)
+  }
+
+  const cancelEnrollment = () => {
+    setShowAlert(false)
   }
 
   const handleLike = () => {
@@ -362,7 +383,7 @@ const CourseDetailsPage = () => {
                           : 'bg-blue-600 text-white hover:bg-blue-700'
                       }`}
                     >
-                      {isEnrolled ? '✓ Enrolled' : 'Enroll Now'}
+                      {isEnrolled ? 'Enrolled' : 'Enroll Now'}
                     </button>
                     
                     <div className="space-y-3 text-sm text-gray-600">
@@ -572,6 +593,76 @@ const CourseDetailsPage = () => {
       </section>
 
       <Footer />
+
+      {/* Custom Alert/Swal */}
+      {showAlert && (
+        <div className="fixed inset-0 flex items-center justify-center p-4 z-50">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6"
+          >
+            {alertType === 'info' ? (
+              <>
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                    <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">Confirm Enrollment</h3>
+                </div>
+                <p className="text-gray-600 mb-6">{alertMessage}</p>
+                <div className="flex gap-3">
+                  <button
+                    onClick={cancelEnrollment}
+                    className="flex-1 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={confirmEnrollment}
+                    className="flex-1 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  >
+                    Confirm
+                  </button>
+                </div>
+              </>
+            ) : alertType === 'success' ? (
+              <>
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                    <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">Success!</h3>
+                </div>
+                <p className="text-gray-600">{alertMessage}</p>
+              </>
+            ) : (
+              <>
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+                    <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">Error</h3>
+                </div>
+                <p className="text-gray-600 mb-6">{alertMessage}</p>
+                <button
+                  onClick={() => setShowAlert(false)}
+                  className="w-full py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                >
+                  OK
+                </button>
+              </>
+            )}
+          </motion.div>
+        </div>
+      )}
     </div>
   )
 }
