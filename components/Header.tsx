@@ -11,6 +11,7 @@ const Header = () => {
     const router = useRouter();
     const [showAuthModal, setShowAuthModal] = useState(false);
     const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
+    const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
@@ -22,6 +23,15 @@ const Header = () => {
             setShowAuthModal(false);
         }
     }, [pathname]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 0);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const handleAuthClick = (mode: 'login' | 'signup') => {
         const params = new URLSearchParams(window.location.search);
@@ -49,7 +59,7 @@ const Header = () => {
     const hoverLinkColor = 'hover:text-blue-400';
 
     return (
-        <header className={`${headerBgColor} shadow-sm sticky top-0 z-50`}>
+        <header className={`${headerBgColor} shadow-sm sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'mx-auto w-4/5 rounded-lg mt-12' : 'w-full'}`}>
             <div className="container mx-auto px-4 py-4 flex justify-between items-center">
                 <Link href="/" className="flex items-center">
                     <Image
