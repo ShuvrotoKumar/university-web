@@ -58,7 +58,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="text-center text-gray-500 text-sm">
-          Copyright © 2025 - Mrs. College Guide
+          Copyright © 2025 - RM University
         </div>
       </div>
     </footer>
