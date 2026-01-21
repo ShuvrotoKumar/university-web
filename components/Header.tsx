@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import AuthModal from './AuthModal';
 import Image from 'next/image';
+import { Menu, X } from 'lucide-react';
 
 const Header = () => {
     const pathname = usePathname();
@@ -13,6 +14,7 @@ const Header = () => {
     const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     useEffect(() => {
         setIsMounted(true);
@@ -107,7 +109,16 @@ const Header = () => {
                     </Link>
                 </nav>
 
-                <div className="flex items-center gap-0.5">
+                {/* Mobile Menu Button */}
+                <button
+                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    className="md:hidden text-white p-2 rounded-md hover:bg-gray-800 transition-colors"
+                    aria-label="Toggle menu"
+                >
+                    {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
+
+                <div className="hidden md:flex items-center gap-0.5">
                     <Link href="/auth/login">
                     <button
                         onClick={() => handleAuthClick('login')}
@@ -129,6 +140,82 @@ const Header = () => {
                     )}
                 </div>
             </div>
+
+            {/* Mobile Menu */}
+            {isMobileMenuOpen && (
+                <div className="md:hidden bg-black border-t border-gray-800">
+                    <div className="container mx-auto px-4 py-4 space-y-4">
+                        <nav className="flex flex-col space-y-4 text-white">
+                            <Link 
+                                href="/" 
+                                className={`${isActive('/')} transition-colors py-2`}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                Home
+                            </Link>
+                            <Link 
+                                href="/universities" 
+                                className={`${isActive('/universities')} transition-colors py-2`}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                Universities
+                            </Link>
+                            <Link 
+                                href="/courses" 
+                                className={`${isActive('/courses')} transition-colors py-2`}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                Courses
+                            </Link>
+                            <Link 
+                                href="/community" 
+                                className={`${isActive('/community')} transition-colors py-2`}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                Community
+                            </Link>
+                            <Link 
+                                href="/news" 
+                                className={`${isActive('/news')} transition-colors py-2`}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                News
+                            </Link>
+                            <Link 
+                                href="/about" 
+                                className={`${isActive('/about')} transition-colors py-2`}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                About
+                            </Link>
+                        </nav>
+                        <div className="flex flex-col space-y-3 pt-4 border-t border-gray-800">
+                            <Link href="/auth/login">
+                                <button
+                                    onClick={() => {
+                                        handleAuthClick('login');
+                                        setIsMobileMenuOpen(false);
+                                    }}
+                                    className="w-full px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+                                >
+                                    Login
+                                </button>
+                            </Link>
+                            <Link href="/auth/register">
+                                <button
+                                    onClick={() => {
+                                        handleAuthClick('signup');
+                                        setIsMobileMenuOpen(false);
+                                    }}
+                                    className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                                >
+                                    Sign Up
+                                </button>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            )}
         </header>
     );
 };
