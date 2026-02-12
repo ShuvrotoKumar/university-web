@@ -3,6 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Link from 'next/link';
 const AboutPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
@@ -114,9 +115,11 @@ const AboutPage = () => {
           <p className="text-xl mb-8 max-w-2xl mx-auto">
             Join thousands of students who have found their perfect university with our help.
           </p>
-          <button className="px-8 py-3 bg-yellow-400 text-blue-900 font-semibold rounded-md hover:bg-yellow-500 transition-colors">
-            Get Started
-          </button>
+          <Link href="/universities">
+            <button className="px-8 py-3 bg-yellow-400 text-blue-900 font-semibold rounded-md hover:bg-yellow-500 transition-colors">
+              Get Started
+            </button>
+          </Link>
         </div>
       </section>
       <Footer />
