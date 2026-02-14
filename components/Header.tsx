@@ -75,8 +75,8 @@ const Header = () => {
     const hoverLinkColor = 'hover:text-blue-400';
 
     return (
-        <header className={`${headerBgColor} shadow-sm sticky top-0 z-50 transition-all duration-300 ${isMounted && isScrolled ? 'mx-auto w-4/5 rounded-lg mt-12' : 'w-full'}`}>
-            <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <header className={`${headerBgColor} shadow-sm sticky top-0 z-50 transition-all duration-300 w-full`}>
+            <div className="container mx-auto px-4 py-3 md:py-4 flex justify-between items-center">
                 <Link href="/" className="flex items-center">
                     <Image
                         src="/logo.png"
@@ -88,7 +88,7 @@ const Header = () => {
                     />
                 </Link>
 
-                <nav className="hidden text-white md:flex space-x-6">
+                <nav className="hidden text-white md:flex space-x-4 lg:space-x-6">
                     <Link href="/" className={`${isActive('/')} transition-colors`}>
                         Home
                     </Link>
@@ -115,8 +115,9 @@ const Header = () => {
                 {/* Mobile Menu Button */}
                 <button
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    className="md:hidden text-white p-2 rounded-md hover:bg-gray-800 transition-colors"
+                    className="md:hidden text-white p-2 -mr-2 rounded-md hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
                     aria-label="Toggle menu"
+                    aria-expanded={isMobileMenuOpen}
                 >
                     {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
@@ -145,10 +146,19 @@ const Header = () => {
             </div>
 
             {/* Mobile Menu */}
-            {isMobileMenuOpen && (
-                <div className="md:hidden bg-black border-t border-gray-800">
-                    <div className="container mx-auto px-4 py-4 space-y-4">
-                        <nav className="flex flex-col space-y-4 text-white">
+            <div className={`md:hidden bg-black/95 backdrop-blur-sm fixed inset-0 z-40 transform transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+                <div className="fixed top-4 right-4">
+                    <button
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="text-white p-2 rounded-full hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-white"
+                        aria-label="Close menu"
+                    >
+                        <X size={24} />
+                    </button>
+                </div>
+                <div className="h-full overflow-y-auto pt-16 pb-8 px-6">
+                    <div className="space-y-6">
+                        <nav className="flex flex-col space-y-6 text-white">
                             <Link 
                                 href="/" 
                                 className={`${isActive('/')} transition-colors py-2`}
@@ -199,7 +209,7 @@ const Header = () => {
                                 About
                             </Link>
                         </nav>
-                        <div className="flex flex-col space-y-3 pt-4 border-t border-gray-800">
+                        <div className="flex flex-col space-y-4 pt-8 border-t border-gray-800 mt-8">
                             <Link href="/auth/login">
                                 <button
                                     onClick={() => {
@@ -225,9 +235,160 @@ const Header = () => {
                         </div>
                     </div>
                 </div>
-            )}
-        </header>
-    );
-};
+            </div>
+            
+            {/* Overlay for mobile menu */}
+                />
+            </Link>
+
+            <nav className="hidden text-white md:flex space-x-4 lg:space-x-6">
+                <Link href="/" className={`${isActive('/')} transition-colors`}>
+                    Home
+                </Link>
+                <Link href="/universities" className={`${isActive('/universities')} transition-colors`}>
+                    Universities
+                </Link>
+                <Link href="/courses" className={`${isActive('/courses')} transition-colors`}>
+                    Courses
+                </Link>
+                <Link href="/community" className={`${isActive('/community')} transition-colors`}>
+                    Community
+                </Link>
+                <Link href="/news" className={`${isActive('/news')} transition-colors`}>
+                    News
+                </Link>
+                <Link href="/about" className={`${isActive('/about')} transition-colors`}>
+                    About
+                </Link>
+            </nav>
+
+            {/* Mobile Menu Button */}
+            <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="md:hidden text-white p-2 -mr-2 rounded-md hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                aria-label="Toggle menu"
+                aria-expanded={isMobileMenuOpen}
+            >
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+
+            <div className="hidden md:flex items-center gap-0.5">
+                <Link href="/auth/login">
+                <button
+                    onClick={() => handleAuthClick('login')}
+                    className="px-4 py-2  text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+                >
+                    Login
+                </button>
+                </Link>
+                <Link href="/auth/register">
+                <button
+                    onClick={() => handleAuthClick('signup')}
+                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                >
+                    Sign Up
+                </button>
+                </Link>
+                {showAuthModal && (
+                    <AuthModal onClose={closeAuthModal} initialMode={authMode} />
+                )}
+            </div>
+        </div>
+
+        {/* Mobile Menu */}
+        <div className={`md:hidden bg-black/95 backdrop-blur-sm fixed inset-0 z-40 transform transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+            <div className="fixed top-4 right-4">
+                <button
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-white p-2 rounded-full hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-white"
+                    aria-label="Close menu"
+                >
+                    <X size={24} />
+                </button>
+            </div>
+            <div className="h-full overflow-y-auto pt-16 pb-8 px-6">
+                <div className="space-y-6">
+                    <nav className="flex flex-col space-y-6 text-white">
+                        <Link 
+                            href="/" 
+                            className={`${isActive('/')} transition-colors py-2`}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            Home
+                        </Link>
+                        <Link 
+                            href="/universities" 
+                            className={`${isActive('/universities')} transition-colors py-2`}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            Universities
+                        </Link>
+                        <Link 
+                            href="/courses" 
+                            className={`${isActive('/courses')} transition-colors py-2`}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            Courses
+                        </Link>
+                        <Link 
+                            href="/community" 
+                            className={`${isActive('/community')} transition-colors py-2`}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            Community
+                        </Link>
+                        <Link 
+                            href="/news" 
+                            className={`${isActive('/news')} transition-colors py-2`}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            News
+                        </Link>
+                        <Link 
+                            href="/about" 
+                            className={`${isActive('/about')} transition-colors py-2`}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            About
+                        </Link>
+                    </nav>
+                    <div className="flex flex-col space-y-4 pt-8 border-t border-gray-800 mt-8">
+                        <Link href="/auth/login">
+                            <button
+                                onClick={() => {
+                                    handleAuthClick('login');
+                                    setIsMobileMenuOpen(false);
+                                }}
+                                className="w-full px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+                            >
+                                Login
+                            </button>
+                        </Link>
+                        <Link href="/auth/register">
+                            <button
+                                onClick={() => {
+                                    handleAuthClick('signup');
+                                    setIsMobileMenuOpen(false);
+                                }}
+                                className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                            >
+                                Sign Up
+                            </button>
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {/* Overlay for mobile menu */}
+        {isMobileMenuOpen && (
+            <div 
+                className="fixed inset-0 bg-black/50 z-30 md:hidden"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-hidden="true"
+            />
+        )}
+    </header>
+);
 
 export default Header;
