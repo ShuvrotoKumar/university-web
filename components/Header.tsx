@@ -68,7 +68,7 @@ const Header = () => {
         return 'text-gray-300 hover:text-blue-400';
     };
 
-    const isSpecialPage = ['/','/universities', '/courses', '/community', '/news', '/about', '/terms', '/about', '/contact', '/faqs','/cookie', '/privacy'].includes(pathname);
+    const isSpecialPage = ['/','/universities', '/courses', '/community', '/news', '/blog', '/about', '/terms', '/about', '/contact', '/faqs','/cookie', '/privacy'].includes(pathname);
     const headerBgColor = isSpecialPage ? 'bg-black' : 'bg-#101829';
     const headerTextColor = 'text-white';
     const activeLinkColor = isSpecialPage ? 'text-white' : 'text-blue-400';
@@ -103,6 +103,9 @@ const Header = () => {
                     </Link>
                     <Link href="/news" className={`${isActive('/news')} transition-colors`}>
                         News
+                    </Link>
+                    <Link href="/blog" className={`${isActive('/blog')} transition-colors`}>
+                        Blog
                     </Link>
                     <Link href="/about" className={`${isActive('/about')} transition-colors`}>
                         About
@@ -180,6 +183,13 @@ const Header = () => {
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
                                 News
+                            </Link>
+                            <Link 
+                                href="/blog" 
+                                className={`${isActive('/blog')} transition-colors py-2`}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                Blog
                             </Link>
                             <Link 
                                 href="/about" 
